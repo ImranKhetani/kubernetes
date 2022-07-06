@@ -20,6 +20,8 @@ kubectl replace -f nginx.yaml
 
 kubectl delete -f nginx.yaml
 
+kubectl run redis --image=redis:alpine --labels="tier=db"
+
 Generate POD Manifest YAML file (-o yaml). Don’t create it(–dry-run)
 
 kubectl run nginx --image=nginx --dry-run=client -o yaml
@@ -54,5 +56,6 @@ kubectl create service clusterip my-cs --tcp=80:80 --dry-run=client -o yaml
 
 kubectl create service loadbalancer my-lbs --tcp=80:80 --dry-run=client -o yaml
 
-Generate NameSpace YAML file (-o yaml). Don’t create it(–dry-run)
+
+
 
