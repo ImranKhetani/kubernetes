@@ -2,18 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: httpd-frontend
-  name: httpd-frontend
+    app: ikclasses-webapp
+  name: webapp
+  namespace: prod-env
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: httpd-frontend
+      app: ikclasses-webapp
   template:
     metadata:
       labels:
-        app: httpd-frontend
+        app: ikclasses-webapp
     spec:
       containers:
-      - image: httpd
+      - image: imrankhetani/ikc:v5
         name: web-pods
