@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    name: myapp-pod
+spec:
+  containers:
+  -  image: data-processor
+     name: data-processor
+     ports:
+       - containerPort: 80
+     resources:
+       requests:
+         memory: "512Mi"
+         cpu: "1"
+       limits:
+         memory: "1Gi"
+         cpu: "2"

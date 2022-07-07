@@ -1,0 +1,5 @@
+kubectl get pods --selector env=dev
+
+kubectl get pods --selector bu=finance
+
+kubectl get pods --selector env=prod,bu=finance,tier=frontend

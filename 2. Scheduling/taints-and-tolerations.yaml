@@ -1,0 +1,26 @@
+# kubectl taint nodes node-name key=value:taint-effect
+# e.g. kubectl taint nodes node1 app=blue:NoSchedule
+# kubectl run NAME --image=image [--env="key=value"] [--port=port] [--dry-run=server|client]
+# e.g. kubectl run my-pod --image=nginx --env=prod --port=80 --dry-run=client -o yaml
+# kubectl describe node kubemaster | grep Taint
+# kubectl taint node controlplane node-role.kubernetes.io/master:NoSchedule-
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: web-app
+    tier: front-end
+  name: my-pod
+spec:
+  containers:
+  - env:
+    - name: env
+      value: prod
+    image: nginx
+    name: my-pod
+  tolerations:
+    - key: "web-app"
+      operator: "Equal"
+      value: "blue"
+      effect: "NoSchedule"
