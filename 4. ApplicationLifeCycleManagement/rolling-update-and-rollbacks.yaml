@@ -1,0 +1,26 @@
+# kubectl rollout status deployment/myapp-deployment
+# kubectl rollout history deployment/myapp-deployment
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ikclasses-webapp
+  name: webapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ikclasses-webapp
+  template:
+    metadata:
+      labels:
+        app: ikclasses-webapp
+    spec:
+      containers:
+      - image: imrankhetani/ikc:v2
+        name: web-pods
+
+# kubectl apply -f deployment.yaml
+# kubectl set image deployment/myapp-deployment nginx=nginx:1.9.1
+# kubectl rollout undo deployment/webapp
