@@ -1,0 +1,52 @@
+# Generate a Pod Manifests file
+
+kubectl run nginx --image=nginx --dry-run=client -o yaml > nginx.yaml
+
+# Create a Pod
+
+kubectl create -f .\nginx.yaml
+
+# Edit the yaml file and add a nodeName section under specification as shown
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx
+  name: nginx
+spec:
+  nodeName: aks-nodepool01-31346560-vmss000001
+  containers:
+  - image: nginx
+    name: nginx
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+# Replace the configuration
+
+kubectl replace --force -f .\nginx.yaml
+
+# Filter pod output using selector command
+
+kubectl get pods --selector env=dev
+
+kubectl get pods --selector env=dev --no-headers | wc -l
+
+# Taint and Tolerations
+
+kubectl taint nodes node-name key=value:taint-effect
+
+e.g. kubectl taint nodes aks-nodepool01-31346560-vmss000002 app=blue:NoSchedule
+
+#Scaling AKS Cluster 
+
+az aks scale --resource-group kubernetes-rg01 --name ik-aks-dev-ci --node-count 1 --nodepool-name nodepool01
+
+#Labeling nodes
+
+kubectl label nodes <node-name> <label-key>=<label-value>
+
+e.g. kubectl label nodes aks-nodepool01-31346560-vmss000001 color=blue
